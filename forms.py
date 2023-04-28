@@ -29,12 +29,10 @@ class AddPetForm(FlaskForm):
     age = SelectField(
         'Age',
         choices=[
-        ('BBY', 'Baby'),
-        ('YNG', 'Young'),
-        ('ADT', 'Adult'),
-        ('SNR', 'Senior')],
+            ('BBY', 'Baby'),
+            ('YNG', 'Young'),
+            ('ADT', 'Adult'),
+            ('SNR', 'Senior')],
         validators=[InputRequired()])
 
     notes = StringField('Notes')
-
-

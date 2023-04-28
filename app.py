@@ -25,6 +25,7 @@ connect_db(app)
 
 toolbar = DebugToolbarExtension(app)
 
+
 @app.get('/')
 def show_pet_listings():
     """
@@ -35,11 +36,13 @@ def show_pet_listings():
 
     return render_template('homepage.html')
 
+
 @app.get('/add')
 def display_add_pet_form():
     """renders the add pet form template"""
 
     return render_template('add_pet_form.html')
+
 
 @app.route('/add', methods=['GET', 'POST'])
 def handle_add_pet_form():
@@ -54,19 +57,16 @@ def handle_add_pet_form():
         age = form.age.data
         notes = form.notes.data
 
-        new_pet = Pet(name = name,
-                      species = species,
-                      photo_url= photo_url,
-                      age = age,
-                      notes = notes)
+        new_pet = Pet(name=name,
+                      species=species,
+                      photo_url=photo_url,
+                      age=age,
+                      notes=notes)
 
         db.session.add(new_pet)
         db.session.commit()
         flash(f"Added {new_pet.name}!")
         return redirect('/')
 
-
     else:
         return render_template('add_pet_form.html')
-
-
