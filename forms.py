@@ -2,7 +2,7 @@
 
 from flask_wtf import FlaskForm
 from wtforms import StringField, FloatField, IntegerField, SelectField
-from wtforms.validators import InputRequired, Optional, Email, URL
+from wtforms.validators import InputRequired, Optional, Email, URL, ValidationError
 
 # {{ form.hidden_tag() }}
 # pet name, species, photo url, age, notes: url path /add
@@ -14,13 +14,17 @@ class AddPetForm(FlaskForm):
         'Pet Name',
         validators=[InputRequired()])
 
-    species = StringField(
+    species = SelectField(
         'Species',
+        choices=[
+            ('CAT', 'Cat'),
+            ('DOG', 'Dog'),
+            ('PORC', 'Porcupine')],
         validators=[InputRequired()])
 
     photo_url = StringField(
         'Photo URL',
-        validators=[InputRequired(), URL(message="not a valid URL")])
+        validators=[Optional(), URL()])
 
     age = SelectField(
         'Age',
@@ -32,3 +36,5 @@ class AddPetForm(FlaskForm):
         validators=[InputRequired()])
 
     notes = StringField('Notes')
+
+

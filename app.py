@@ -2,10 +2,10 @@
 
 import os
 
-from flask import Flask, render_template, redirect, flash
+from flask import Flask, render_template, redirect, flash, request
 from flask_debugtoolbar import DebugToolbarExtension
 
-from models import connect_db
+from models import connect_db, db, Pet
 
 from forms import AddPetForm
 
@@ -54,7 +54,19 @@ def handle_add_pet_form():
         age = form.age.data
         notes = form.notes.data
 
-        # ADD IT TO DB PLEASE DONTT FORGET
+        new_pet = Pet(name = name,
+                      species = species,
+                      photo_url= photo_url,
+                      age = age,
+                      notes = notes)
 
-        flash("pet added!!!")
+        db.session.add(new_pet)
+        db.session.commit()
+        flash(f"Added {new_pet.name}!")
+        return redirect('/')
+
+
+    else:
+        return render_template('add_pet_form.html')
+
 
