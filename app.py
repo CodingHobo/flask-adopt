@@ -2,7 +2,7 @@
 
 import os
 
-from flask import Flask
+from flask import Flask, render_template, redirect, flash
 from flask_debugtoolbar import DebugToolbarExtension
 
 from models import connect_db
@@ -22,3 +22,13 @@ connect_db(app)
 # app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 
 toolbar = DebugToolbarExtension(app)
+
+@app.get('/')
+def show_pet_listings():
+    """
+    displays all pets
+    (name, photo(if present), and indicates if they are available)
+
+    """
+
+    return render_template('homepage.html')
