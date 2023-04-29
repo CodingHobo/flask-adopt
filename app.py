@@ -41,7 +41,9 @@ def show_pet_listings():
 def display_add_pet_form():
     """renders the add pet form template"""
 
-    return render_template('add_pet_form.html')
+    form = AddPetForm()
+
+    return render_template('add_pet_form.html', form=form)
 
 
 @app.route('/add', methods=['GET', 'POST'])
@@ -61,7 +63,8 @@ def handle_add_pet_form():
                       species=species,
                       photo_url=photo_url,
                       age=age,
-                      notes=notes)
+                      notes=notes,
+                      available=True)
 
         db.session.add(new_pet)
         db.session.commit()
@@ -75,7 +78,7 @@ def handle_add_pet_form():
 
 
 
-@app.get('/<pet-id-number>')
+@app.get('/<int:pet_id_number>')
 def display_pet_info(pet_id_number):
     """dislpay pet information, displays edit pet form"""
     pet = Pet.query.get_or_404(pet_id_number)
@@ -83,7 +86,7 @@ def display_pet_info(pet_id_number):
     return render_template('pet_info.html', pet=pet)
 
 
-@app.post('/<pet-id-number>')
+@app.post('/<int:pet_id_number>')
 def handle_edit_form(pet_id_number):
     """handles edit pet form"""
 
@@ -103,7 +106,7 @@ def handle_edit_form(pet_id_number):
         db.session.commit()
         flash(f"Edited {pet.name}!")
 
-        return redirect('/<pet-id-number>')
+        return redirect(f'/{pet_id_number}')
 
 
 

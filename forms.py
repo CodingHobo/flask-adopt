@@ -1,12 +1,8 @@
 """Forms for adopt app."""
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField
-from wtforms.validators import InputRequired, Optional, URL, BooleanField
-
-# {{ form.hidden_tag() }}
-# pet name, species, photo url, age, notes: url path /add
-# add alink to this from the homepage
+from wtforms import StringField, SelectField, BooleanField
+from wtforms.validators import InputRequired, Optional, URL
 
 
 class AddPetForm(FlaskForm):

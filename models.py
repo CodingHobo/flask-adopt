@@ -52,8 +52,8 @@ class Pet(db.Model):
         nullable=True
     )
 
-# FIXME: COMPLETE THIS
     available = db.Column(
+        db.Boolean,
         nullable=False,
         default=True
     )
