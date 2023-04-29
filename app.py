@@ -33,8 +33,9 @@ def show_pet_listings():
     (name, photo(if present), and indicates if they are available)
 
     """
+    pets = Pet.query.all()
 
-    return render_template('homepage.html')
+    return render_template('homepage.html', pets=pets)
 
 
 @app.get('/add')
@@ -52,12 +53,16 @@ def handle_add_pet_form():
 
     form = AddPetForm()
 
+    print('testing')
+
     if form.validate_on_submit():
         name = form.name.data
         species = form.species.data
         photo_url = form.photo_url.data
         age = form.age.data
         notes = form.notes.data
+
+        print('inside if block')
 
         new_pet = Pet(name=name,
                       species=species,
@@ -74,8 +79,8 @@ def handle_add_pet_form():
         return redirect('/')
 
     else:
-        return render_template('add_pet_form.html', form = form)
-
+        flash("Messed Up, Man!")
+        return render_template('add_pet_form.html', form=form)
 
 
 @app.get('/<int:pet_id_number>')
@@ -107,7 +112,3 @@ def handle_edit_form(pet_id_number):
         flash(f"Edited {pet.name}!")
 
         return redirect(f'/{pet_id_number}')
-
-
-
-

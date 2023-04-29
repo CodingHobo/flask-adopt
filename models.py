@@ -23,7 +23,6 @@ class Pet(db.Model):
     id = db.Column(
         db.Integer,
         primary_key=True,
-        autoincrement=True
     )
 
     name = db.Column(
@@ -49,7 +48,8 @@ class Pet(db.Model):
 
     notes = db.Column(
         db.Text,
-        nullable=True
+        nullable=True,
+        default = ''
     )
 
     available = db.Column(
@@ -57,3 +57,4 @@ class Pet(db.Model):
         nullable=False,
         default=True
     )
+
