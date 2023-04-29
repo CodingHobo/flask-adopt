@@ -77,15 +77,15 @@ def handle_add_pet_form():
 
 @app.get('/<pet-id-number>')
 def display_pet_info(pet_id_number):
-    # <3
+    """dislpay pet information, displays edit pet form"""
+    pet = Pet.query.get_or_404(pet_id_number)
 
-
-
+    return render_template('pet_info.html', pet=pet)
 
 
 @app.post('/<pet-id-number>')
 def handle_edit_form(pet_id_number):
-    """displays pet information and edit form"""
+    """handles edit pet form"""
 
     pet = Pet.query.get_or_404(pet_id_number)
 

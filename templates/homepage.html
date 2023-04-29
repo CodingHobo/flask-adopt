@@ -4,5 +4,17 @@
   <h1>Pretty Pet Adoption Agency</h1>
   <h2>Our Pretty Pets</h2>
   <!-- add pet listings -->
+  <ul>
+    {% for pet in pets %}
+    <a href="/{{pet.id}}">
+      <li> {{pet.name}} <img src={{pet.photo_url}}> </li>
+    </a>
+    {% endfor %}
+  </ul>
+  <a href='/users/new'>
+    <button type="button">Add user</button>
+  </a>
+
+
 
 {% endblock %}

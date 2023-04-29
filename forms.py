@@ -37,11 +37,12 @@ class AddPetForm(FlaskForm):
 
     notes = StringField('Notes')
 
+
 class EditPetForm(FlaskForm):
-        photo_url = StringField(
+    photo_url = StringField(
         'Photo URL',
         validators=[Optional(), URL()])
 
-        notes = StringField('Notes')
+    notes = StringField('Notes')
 
-        available = BooleanField("Is available", default="checked")
+    available = BooleanField("Is available", default="checked")
